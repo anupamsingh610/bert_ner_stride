@@ -1,4 +1,4 @@
-# BERT-NER with DOC_STRIDE
+# BERT-NER with doc_stride
 Application of doc_stride in BERT for NER 
 
 Use Google's BERT for named entity recognition （CoNLL-2003 as the dataset）. 
