@@ -234,8 +234,7 @@ class NerProcessor(DataProcessor):
         "[PAD]" for padding
         :return:
         """
-        # return ["[PAD]","B-MISC", "I-MISC", "O", "B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "X","[CLS]","[SEP]"]
-        return ['[PAD]','B-AE','B-Age','B-Concomitant','B-Concomitant-Disease','B-Country-Of-Incidence','B-Date-of-Initial-Receipt','B-Dosage','B-Drug','B-Family-History','B-Gender','B-Indication','B-Lab-Class','B-Lab-Data','B-Lab-Test-Value','B-Medical-Drug-History','B-Medical-History','B-ROA','B-Weight','B-lab-date','I-AE','I-Age','I-Concomitant','I-Concomitant-Disease','I-Country-Of-Incidence','I-Date-of-Initial-Receipt','I-Dosage','I-Drug','I-Family-History','I-Indication','I-Lab-Class','I-Lab-Data','I-Lab-Test-Value','I-Medical-Drug-History','I-Medical-History','I-ROA','I-Weight','I-lab-date','O','X', '[CLS]', '[SEP]','I-Gender']
+        return ["[PAD]","B-MISC", "I-MISC", "O", "B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "X","[CLS]","[SEP]"]
 
     def _create_example(self, lines, set_type):
         examples = []
@@ -316,7 +315,7 @@ def convert_single_example(ex_index, example, label_list, max_seq_length, tokeni
                 labels.append(label)
             else:
                 labels.append("X")
-    print(">>>>>>>>>>>>>>>>", len(tokens))
+    # print(">>>>>>>>>>>>>>>>", len(tokens))
     max_tokens_for_doc = max_seq_length - 1
     _DocSpan = collections.namedtuple(  # pylint: disable=invalid-name
         "DocSpan", ["start", "length"])
