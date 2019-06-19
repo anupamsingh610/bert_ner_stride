@@ -1,13 +1,11 @@
 # BERT_NER_STRIDE
 Application of doc_stride in BERT for NER 
 
-# BERT-NER Version 2
-
-
 Use Google's BERT for named entity recognition （CoNLL-2003 as the dataset）. 
 
 
-The original version （see old_version for more detail） contains some hard codes and lacks corresponding annotations,which is inconvenient to understand. So in this updated version,there are some new ideas and tricks （On data Preprocessing and layer design） that can help you quickly implement the fine-tuning model (you just need to try to modify crf_layer or softmax_layer).
+### Disclaimer
+This repo is modified version of https://github.com/kyzhouhzau/BERT-NER with addition of doc_stride in order to process large texts (sequence length > 512). Since Google's pretrained models have can only support ```max_seq_length``` of 512 tokens, we apply doc_stride, a method described for SQuAD dataset.
 
 ### Folder Description:
 ```
@@ -17,7 +15,8 @@ BERT-NER
 |____ data		            # train data
 |____ middle_data	            # middle data (label id map)
 |____ output			    # output (final model, predict results)
-|____ BERT_NER.py		    # mian code
+|____ BERT_NER_ORIG.py		    # original code without doc_stride
+|____ BERT_NER_STRIDE.py		    # main code with doc_stride
 |____ conlleval.pl		    # eval code
 |____ run_ner.sh    		    # run model and eval result
 
@@ -31,7 +30,7 @@ bash run_ner.sh
 
 ### What's in run_ner.sh:
 ```
-python BERT_NER.py\
+python BERT_NER_STRIDE.py\
     --task_name="NER"  \
     --do_lower_case=False \
     --crf=False \
@@ -46,7 +45,8 @@ python BERT_NER.py\
     --train_batch_size=32   \
     --learning_rate=2e-5   \
     --num_train_epochs=3.0   \
-    --output_dir=./output/result_dir
+    --output_dir=./output/result_dir  \
+    --doc_stride=128
 
 perl conlleval.pl -d '\t' < ./output/result_dir/label_test.txt
 ```
