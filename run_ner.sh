@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-  python BERT_NER.py\
+  python BERT_NER_STRIDE.py\
     --task_name="NER"  \
     --do_lower_case=False \
     --crf=True \
